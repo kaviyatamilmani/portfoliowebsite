@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Personal Portfolio</title>
+
+<style>
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Arial;
+margin:0;
+transition:0.4s;
+}
+
+.dark{
+background:#121212;
+color:white;
+}
+
+header{
+background:#333;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+nav{
+background:#555;
+text-align:center;
+padding:10px;
+position:sticky;
+top:0;
+}
+
+nav a{
+color:white;
+margin:15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+section{
+padding:40px;
+}
+
+img.profile{
+width:150px;
+border-radius:50%;
+}
+
+/* Projects Grid */
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.card{
+padding:20px;
+background:#eee;
+border-radius:10px;
+}
+
+/* Skills */
+.skill{
+background:#ddd;
+border-radius:20px;
+margin:10px 0;
+}
+
+.bar{
+height:20px;
+background:green;
+width:0;
+border-radius:20px;
+transition:1s;
+}
+
+/* Testimonials */
+.testimonial{
+display:none;
+text-align:center;
+font-style:italic;
+}
+
+/* Footer */
+footer{
+background:#333;
+color:white;
+text-align:center;
+padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>My Portfolio</h1>
+<button onclick="toggleMode()">Toggle Dark Mode</button>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#projects">Projects</a>
+<a href="#blog">Blog</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+<h2>Welcome</h2>
+<img src="https://via.placeholder.com/150" class="profile">
+<p>Hello! I am a Computer Science student and Web Developer.</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+<h2>About Me</h2>
+
+<h3>Education</h3>
+<p>B.E Computer Science Engineering</p>
+
+<h3>Skills</h3>
+
+<div class="skill"><div class="bar" style="width:90%"></div>HTML</div>
+<div class="skill"><div class="bar" style="width:80%"></div>CSS</div>
+<div class="skill"><div class="bar" style="width:70%"></div>JavaScript</div>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+<h2>Projects</h2>
+
+<div class="projects">
+<div class="card">Student Portal</div>
+<div class="card">E-Commerce Website</div>
+<div class="card">Java Mini Project</div>
+</div>
+
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+<h2>Blog / News</h2>
+<ul id="postList"></ul>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+<h2>Testimonials</h2>
+
+<div class="testimonial">"Excellent developer!"</div>
+<div class="testimonial">"Very hardworking student."</div>
+<div class="testimonial">"Creative and talented."</div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<h2>Contact</h2>
+
+<form onsubmit="return validateForm()">
+Name:<br>
+<input type="text" id="name"><br><br>
+
+Email:<br>
+<input type="email" id="email"><br><br>
+
+Message:<br>
+<textarea id="msg"></textarea><br><br>
+
+<button type="submit">Send</button>
+</form>
+
+</section>
+
+<footer>
+<p>Follow Me</p>
+<a href="#">Instagram</a> |
+<a href="#">LinkedIn</a> |
+<a href="#">GitHub</a>
+</footer>
+
+<script>
+
+/* Dark Mode */
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+
+/* Form Validation */
+function validateForm(){
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+
+if(name=="" || email==""){
+alert("Fill all fields");
+return false;
+}
+alert("Form Submitted");
+return true;
+}
+
+/* Dynamic Blog Posts */
+let posts=["My First Blog","Learning JavaScript","Portfolio Design Tips"];
+let list=document.getElementById("postList");
+
+posts.forEach(p=>{
+let li=document.createElement("li");
+li.textContent=p;
+list.appendChild(li);
+});
+
+/* Testimonials Slider */
+let tIndex=0;
+let testimonials=document.querySelectorAll(".testimonial");
+
+function showTestimonial(){
+testimonials.forEach(t=>t.style.display="none");
+tIndex++;
+if(tIndex>testimonials.length) tIndex=1;
+testimonials[tIndex-1].style.display="block";
+setTimeout(showTestimonial,2000);
+}
+showTestimonial();
+
+</script>
+
+</body>
+</html>
